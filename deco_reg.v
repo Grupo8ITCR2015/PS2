@@ -22,12 +22,11 @@ reg A_reg, B_reg, C_reg, D_reg, A_next, B_next, C_next, D_next;
 
 
 //parametros
-localparam  s0=0,
-				s1=1;
+
 localparam [7:0]  A=8'h1C, S=8'h1B, D=8'h23, F=8'h2B, G=8'h34,
-						H=8'h33, J=8'h3B, K=8'h42, L=8'h4B, Z=8'h1A,
-						X=8'h22, C=8'h21, V=8'h2A, B=8'h32, N=8'h31,
-						M=8'h3A;
+		  H=8'h33, J=8'h3B, K=8'h42, L=8'h4B, Z=8'h1A,
+		  X=8'h22, C=8'h21, V=8'h2A, B=8'h32, N=8'h31,
+		  M=8'h3A;
 						
 // Secuencial
 always @(posedge clk, posedge reset)
