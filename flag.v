@@ -50,7 +50,7 @@ always@*
 	flag_next=bandera;
 	case(state)
 		idle:
-			if(Datain==Senal && enable==0) //si la entrada es F0 y se toma el negedge del rx_done_tick
+			if(Datain==Senal && enable==1) //si la entrada es F0 y se toma el negedge del rx_done_tick
 				begin
 				flag_next=datanew;
 				next_state=datanew;
@@ -60,7 +60,7 @@ always@*
 				next_state=idle; // de lo contrario espera
 				end
 		datanew:
-			if(flag_next==datanew && enable==0) begin //bandera en 1 y se mantiene el rx_done_tick
+			if(flag_next==datanew && enable==1) begin //bandera en 1 y se mantiene el rx_done_tick
 				flag_next=datanew;
 				next_state=datanew;
 				end
