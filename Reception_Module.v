@@ -19,7 +19,7 @@ output wire T0,T1,E,H1
 	 
 	 
 wire bandera;
-wire [7:0] data;	 
+wire [7:0] data,data2;	 
 	 
 // Analisis de datos
 deco_reg data_detector (
@@ -35,17 +35,25 @@ deco_reg data_detector (
 	 
 // Bandera
 flag byflag (
-    .enable(rx_done_tick), 
     .clk(clk), 
     .reset(reset), 
-    .Din(data), 
+    .Din(data2), 
     .bandera(bandera)
     );
 	 
 // Instantiate the module
-register static_data (
+register static_data1 (
     .din(din), 
     .dout(data), 
+    .clk(clk), 
+    .enable(rx_done_tick), 
+    .reset(reset)
+    );
+	 
+// Instantiate the module
+register static_data2 (
+    .din(data), 
+    .dout(data2), 
     .clk(clk), 
     .enable(rx_done_tick), 
     .reset(reset)
