@@ -12,12 +12,24 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module flag(
-input wire enable,clk,
+input wire clk,
 input wire reset,
 input wire [7:0] Din,
-output wire bandera
+output reg bandera
     );
 	 
+always@(posedge clk)
+		if(reset)
+			bandera=1'b0;
+		else if(Din==8'hF0)
+			bandera=1'b1;
+			else
+			bandera=1'b0;
+	 
+	 
+	 
+	 
+/*	 
 //parametros locales
 
 localparam	idle=1'b0, datanew=1'b1;
@@ -50,7 +62,7 @@ always@*
 	flag_next=bandera;
 	case(state)
 		idle:
-			if(Datain==Senal && enable==1) //si la entrada es F0 y se toma el negedge del rx_done_tick
+			if(Datain==Senal) //si la entrada es F0 y se toma el negedge del rx_done_tick
 				begin
 				flag_next=datanew;
 				next_state=datanew;
@@ -60,17 +72,13 @@ always@*
 				next_state=idle; // de lo contrario espera
 				end
 		datanew:
-			if(flag_next==datanew && enable==1) begin //bandera en 1 y se mantiene el rx_done_tick
+			begin //bandera en 1 y se mantiene el rx_done_tick
 				flag_next=datanew;
-				next_state=datanew;
-				end
-			else begin  //no se cumple y vuelve a esperar bandera
-				flag_next=idle;
 				next_state=idle; end
 		default: next_state=idle;
 	endcase
 	end
 
 assign bandera=flag_reg; //asignación de salidas
-
+*/
 endmodule
